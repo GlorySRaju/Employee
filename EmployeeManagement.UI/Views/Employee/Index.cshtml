@@ -1,0 +1,163 @@
+﻿@model IEnumerable<EmployeeManagement.UI.Models.EmployeeViewModel>
+
+<div class="text-center">
+    <h1><b>EMPLOYEE LIST</b></h1>
+</div>
+<br>
+<div class="text-center">
+    <button class="btn btn-success" data-toggle="modal" data-target="#createModal"> CREATE NEW EMPLOYEE</button>
+    <br>
+    <br>
+</div>
+
+
+
+<div class="text-center">
+    <div class="modal fade" id="displayModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:lightslategray">
+                    <h4 class="modal-title">Employee Details</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div id="displayname"></div>
+                        <div id="displayage"></div>
+                        <div id="displaydepartment"></div>
+                        <div id="displayaddress"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="text-center">
+    <div class="modal fade" id="createModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:lightslategray">
+                    <h4 class="modal-title">Employee Details</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="createdetails">
+                    <form id="createform">
+                        <table>
+                            <tr>
+                                <th><label>Name:</label></th>
+                                <td><input type="text" id="name" placeholder="Enter the Name" required pattern="[A-Za-z\s\.]{1,20}" maxlength="20" /></td>
+                            </tr>
+
+                            <tr>
+                                <th> <label>Department:</label></th>
+                                <td>
+                                    <select typeof="text" name="Dept" id="department">
+                                        <option value="Test" hidden>Select An Option</option>
+                                        <option value="MCA">MCA</option>
+                                        <option value="MBA">MBA</option>
+                                        <option value="BTEC">BTEC</option>
+                                        <option value="MSC">MSC</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th> <label>Age:</label></th>
+                                <td> <input type="text" id="age" placeholder="Enter the Age" required pattern="[0-9]+" /></td>
+                            </tr>
+                            <tr>
+                                <th><label>Address:</label></th>
+                                <td><textarea placeholder="Enter the Address" id="address" required pattern="[A-Za-z]{1-9}" maxlength="50"></textarea></td>
+                            </tr>
+                            <tr><td colspan="2"><button class="btn btn-success" id="button">SUBMIT</button></td></tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="text-center">
+    <div class="modal fade" id="updateModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:lightslategray">
+                    <h4 class="modal-title">UPDATE FORM</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateform">
+                        <table>
+                            <tr>
+                                <th><label>Name:</label></th>
+                                <td><input type="text" id="updatename" placeholder="Enter the Name" required pattern="[A-Za-z\s\.]{1,20}" maxlength="20" /></td>
+                            </tr>
+                            <tr>
+                                <th><label>Department:</label></th>
+                                <td>
+                                    <select typeof="text" name="Dept" id="updatedepartment">
+                                        <option value="Test" hidden>Select An Option</option>
+                                        <option value="MCA">MCA</option>
+                                        <option value="MBA">MBA</option>
+                                        <option value="BTEC">BTEC</option>
+                                        <option value="MSC">MSC</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label>Age:</label></th>
+                                <td><input type="text" id="updateage" placeholder="Enter the Age" required pattern="[0-9]+" /></td>
+                            </tr>
+                            <tr>
+                                <th><label>Address:</label></th>
+                                <td><textarea placeholder="Enter the Address" id="updateaddress" required pattern="[A-Za-z]{1-9}" maxlength="50"></textarea></td>
+                            </tr>
+                            <tr><td colspan="2"><button class="btn btn-success" id="button">UPDATE</button></td></tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    <table class="table table-secondary" border="1">
+        <thead>
+            <tr>
+                <td>
+                    <b>ID</b>
+                </td>
+                <td>
+                    <b>NAME</b>
+                </td>
+                <td>
+                    <b>DEPARTMENT</b>
+                </td>
+                <td>
+                </td>
+            </tr>
+        </thead>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.Id</td>
+                <td>@employee.Name</td>
+                <td>@employee.Department</td>
+                <td>
+                    <button class="btn btn-primary employeeDetails" data-id="@employee.Id" data-toggle="modal" data-target="#displayModal"> DETAILS</button>
+                    <button class="btn btn-info employeeEdit" data-id="@employee.Id" data-toggle="modal" data-target="#updateModal"> EDIT</button>
+                    <button class="btn btn-danger employeeDelete" data-id="@employee.Id"> DELETE</button>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@section Scripts{
+    <script src="~/js/employee.js"></script>
+
+}

@@ -1,0 +1,54 @@
+﻿b {
+    color:royalblue;
+}
+
+
+form {
+  
+    background-color:lightsteelblue;
+    height:300px;
+    text-align: center;
+}
+table{
+    margin-left:70px;
+    padding-left:25px;
+}
+th {
+    text-align: right;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+td {
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+input ,select{
+    width: 180px;
+    height: 35px;
+    border-radius: 3px;
+    border: 1px;
+    border-color: black;
+    text-align: left;
+    font-family: sans-serif;
+    color: gray;
+}
+#button{
+    margin-left:130px;
+}
+textarea {
+    width: 180px;
+    height: 80px;
+    border-radius: 3px;
+    border: 1px;
+    border-color: black;
+    text-align: left;
+    font-family: sans-serif;
+    color: gray;
+}
