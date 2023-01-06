@@ -19,13 +19,13 @@ namespace EmployeeManagement.UI.Controllers
             this._employeeApiClient = employeeApiClient;
         }
 
-        public IActionResult Index()
+       public IActionResult Index()
         {
             try
             {
                 var employees = _employeeApiClient.GetEmployee();
 
-                return View(employees);
+                return View(MapToEmployee(employees));
             }
             catch (Exception ex)
             {
@@ -33,5 +33,25 @@ namespace EmployeeManagement.UI.Controllers
             }
         
         }
-    }
-}
+
+        private object MapToEmployee(IEnumerable<EmployeeData> employees)
+        {
+            try
+            {
+                var employeeList = employees.Select(employee=> new EmployeeViewModel
+                {
+                    Id = employee.Id,
+                    Name = employee.Name,
+                    Department = employee.Department,
+                    
+                });
+                return employeeList;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+     }
+ }
+
