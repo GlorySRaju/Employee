@@ -1,4 +1,4 @@
-﻿using EmployeeManagement.UI.Models;
+using EmployeeManagement.UI.Models;
 using EmployeeManagement.UI.Models.Provider;
 using EmployeeManagement.UI.Providers.Contracts;
 using Newtonsoft.Json;
@@ -24,28 +24,9 @@ namespace EmployeeManagement.UI.Providers.ApiClients
 
             var employeeResponse = response.Content.ReadAsStringAsync().Result;
 
-            var employee = JsonConvert.DeserializeObject<IEnumerable<EmployeeViewModel>>(employeeResponse);
+            var employee = JsonConvert.DeserializeObject<IEnumerable<EmployeeData>>(employeeResponse);
 
-            return MapToEmployee(employee);
-        }
-
-        private IEnumerable<EmployeeData> MapToEmployee(IEnumerable<EmployeeViewModel> employee)
-        {
-            try
-            {
-                var listEmployees = employee.Select(employee => new EmployeeData
-                {
-                    Id = employee.Id,
-                    Name = employee.Name,
-                    Department = employee.Department
-                });
-
-                return listEmployees;
-            }
-            catch
-            {
-                throw;
-            }
+            return employee;
         }
 
         public EmployeeData GetEmployeeById(int id)
@@ -56,31 +37,13 @@ namespace EmployeeManagement.UI.Providers.ApiClients
 
             var employeeResponse = response.Content.ReadAsStringAsync().Result;
 
-            var employee = JsonConvert.DeserializeObject<EmployeeDetailedViewModel>(employeeResponse);
+            var employee = JsonConvert.DeserializeObject<EmployeeData>(employeeResponse);
 
-            return MapToEmployees(employee);
+            return employee;
 
         }
 
-        private EmployeeData MapToEmployees(EmployeeDetailedViewModel employee)
-        {
-            try
-            {
-                var employees = new EmployeeData
-                {
-                    Id = employee.Id,
-                    Name = employee.Name,
-                    Department = employee.Department,
-                    Age = employee.Age,
-                    Address = employee.Address
-                };
-                return employees;
-            }
-            catch
-            {
-                throw;
-            }
-        }
+        
 
         public bool InsertEmployee(EmployeeData employee)
         {
